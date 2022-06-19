@@ -1,0 +1,24 @@
+spring:
+    datasource:
+        hikari:
+            driver-class-name: org.h2.Driver
+            jdbc-url: jdbc:h2:mem:testdb
+            username: sa
+            password: 
+            connection-test-query: select 1
+
+    jpa:
+        generate-ddl: true
+        hibernate:
+            ddl-auto: create         # Hibernate ddl auto (create, create-drop, validate, update)
+        show-sql: true
+        properties:
+            hibernatte:
+                format_sql: true
+    profiles:
+        active: local
+
+#java는 camel, DB는 snake 둘은 맞춰주기위함
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
