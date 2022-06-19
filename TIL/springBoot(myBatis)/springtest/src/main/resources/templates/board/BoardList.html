@@ -30,7 +30,9 @@
                     <td th:text="${list.title}" class="title"></td>
                     <td th:text="${list.hitCnt}"></td>
                     <td th:text="${list.crateDt}"></td>
-
+                </tr>
+                <tr th:unless="${#lists.size(list)} > 0 ">
+                    
                 </tr>
             </tbody>
         </table>
