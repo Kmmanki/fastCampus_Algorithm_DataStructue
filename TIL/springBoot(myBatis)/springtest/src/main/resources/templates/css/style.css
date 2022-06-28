@@ -1,0 +1,22 @@
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+@import url(http://cdn.jsdelivr.net/font-nanum/1.0/nanumbarungothic/nanumbarungothic.css);
+
+html{overflow:scroll}
+html, body, div, h1, h2, form, table, caption, thead, tbody, tr, td, th, submit{
+    margin: 0;
+    outline: 0;
+    border: 0;
+    padding: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+
+body {
+    font-size: 0.875em;
+    line-height: 1.5;
+    color: #666;
+    -webkit-text-size-adjust: none;
+    min-width: 320;
+    font-family: 'NanumGothic', '나눔고딕', 'dotum', 'Helevetica Neue', 'Helvetica Verdana', 'Arial', 'Sans-serief';
+}

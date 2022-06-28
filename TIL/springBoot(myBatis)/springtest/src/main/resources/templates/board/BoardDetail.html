@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/css/stylesheet.css}">
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>게시판 상세</h2>
+        <form id="frm" method="POST">
+
+            <table>
+                <tr>
+                    <th scope="row">글 번호</th>
+                    <td th:text="${board.boardIdx}"></td>
+                    <th scope="row">조회수</th>
+                    <td th:text="${board.hitCnt}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">작성자</th>
+                    <td th:text="${board.creatorId}"></td>
+                    <th scope="row">작성 시간</th>
+                    <td th:text="${board.createDt}"></td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <input name="title" th:value="${board.title}">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <textarea name="contents" th:text="${board.contents}"></textarea>
+                    </td>
+                </tr>
+            </table>
+
+            <input name="boardIdx" th:value="${board.boardIdx}" hidden>
+        </form>
+            <input id="list" type="button" value="목록으로">
+            <input id="modify" type="button" value="수정하기">
+            <input id="delete" type="button" value="삭제하기">
+
+
+    </div>
+
+    <script>
+        document.getElementById("list").onclick = ()=>{
+            location.href="/board/openBoardList.do"
+        }
+
+        document.getElementById("modify").onclick= ()=>{
+            let frm = document.getElementById("frm")
+            frm.action="updateBoard.do"
+            frm.submit()
+        }
+
+        document.getElementById("delete").onclick= ()=> {
+            let frm = document.getElementById("frm")
+            frm.action="deleteBoard.do"
+            frm.submit()
+        } 
+    </script>
+</body>
+</html>

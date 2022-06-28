@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="board.mapper.BoardMapper">
+<mapper namespace="com.springtest.springtest.board.mapper.BoardMapper">
     <select id="selectBoardList" resultType="com.springtest.springtest.board.BoardDto">
     <![CDATA[
         SELECT 
@@ -12,11 +12,84 @@
         FROM   
             t_board
         WHERE
-            delete_yn = "N"
+            delete_yn = 'N'
         ORDER BY board_idx DESC
-        
-
-    ]]>]
+    ]]>
     </select>
 
+    <select id="testSelect" resultType="string">
+        <![CDATA[
+            select 1 from dual
+        ]]>
+    </select>
+
+    <insert id="insertBoard" parameterType="com.springtest.springtest.board.BoardDto">
+        <![CDATA[
+            insert into t_board
+                (title, contents, delete_yn, create_dt, creator_id, hit_cnt)
+            values
+            (
+                #{title},
+                #{contents},
+                'N',
+                NOW(),
+                'admin',
+                0
+            )
+        ]]>
+    </insert>
+
+    <select id="selectBoardDetail" parameterType="integer" resultType="com.springtest.springtest.board.BoardDto">
+        <![CDATA[
+            SELECT 
+                board_idx,
+                title,
+                contents,
+                hit_cnt,
+                create_dt,
+            FROM
+                t_board
+            WHERE
+                1=1 
+                AND delete_yn = 'N'
+                AND board_idx = #{idx}
+
+        ]]>
+    </select>
+
+    <update id="updateHitCnt" parameterType="int">
+        <![CDATA[
+            UPDATE 
+                t_board
+            SET
+                hit_cnt = hit_cnt + 1
+            WHERE
+                board_idx = #{idx}
+        ]]>
+    </update>
+
+    <update id="deleteBoard" parameterType="int">
+        <![CDATA[
+            UPDATE 
+                t_board
+            SET
+                delete_yn = 'Y',
+                update_dt = NOW()
+            WHERE 
+                board_idx = #{idx}
+        ]]>
+    </update>
+
+    <update id="updateBoard" parameterType="com.springtest.springtest.board.BoardDto" >
+        <![CDATA[
+            UPDATE 
+                t_board
+            SET
+                title = #{title},
+                contents = #{contents},
+                update_dt = NOW()
+            WHERE 
+                board_idx = #{boardIdx}
+        ]]>
+    </update>
 </mapper>
