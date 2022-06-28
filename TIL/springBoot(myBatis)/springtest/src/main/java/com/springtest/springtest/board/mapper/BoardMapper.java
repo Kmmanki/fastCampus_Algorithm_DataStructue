@@ -15,3 +15,4 @@ public interface BoardMapper {
     void updateHitCnt(int idx) throws Exception;
     void deleteBoard(int idx) throws Exception;
     void updateBoard(BoardDto dto) throws Exception;
+}
