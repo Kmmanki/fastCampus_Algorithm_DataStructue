@@ -1,0 +1,24 @@
+import store from '../store'
+
+const auth = {
+  componentUpdated (el, bind, vnode) {
+    const { value } = bind
+    const pagerMenuFunc = store.getters.pageMenuFunc
+    const userAuthCode = sessionstorage.userAuthCode // SAU
+    const btnPermit = [] // ['SAU', 'CU']
+    
+    if (value && value.length > 0 ){
+      btnPermit.push(...value)
+    } else {
+      btnpermit.push(value)
+    }
+  }
+  
+  let hasAuth = false
+  if (btnPermit.some(bp => bp === userAuthCode)) {
+    hasAuth = true
+  }
+  if (!hasAuth) {
+    el.parentNone && el.parentNode.removeChild(el)
+  }
+}
