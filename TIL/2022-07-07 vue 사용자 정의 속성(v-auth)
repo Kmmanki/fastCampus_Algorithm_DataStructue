@@ -1,5 +1,7 @@
 import store from '../store'
 
+### /plugins/auth.js
+```
 const auth = {
   componentUpdated (el, bind, vnode) {
     const { value } = bind
@@ -22,3 +24,17 @@ const auth = {
     el.parentNone && el.parentNode.removeChild(el)
   }
 }
+export default auth
+```
+
+### main.js
+```
+... 이하생략
+/**
+* 권한 directive
+* <v-btn v-auth = "['C']"></v-btn>
+*
+*/
+import vauth from './plugins/auth.js'
+Vue.directive('auth', vauth)
+```
