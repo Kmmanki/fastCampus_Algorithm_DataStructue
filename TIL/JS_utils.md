@@ -13,3 +13,8 @@ while((idx = target.findIndex(x => x.name === '김만기') > -1)){
 }
 
 ``
+## Object 리스트에서 특정 값을 가지는 Object만 가져오기
+
+```
+const result = target.filter(x => x.name === '김만기')
+```
