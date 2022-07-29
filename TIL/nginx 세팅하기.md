@@ -75,3 +75,35 @@ server {
 1. https://아이피 접속 후 비공개 설정 화면 -> 고급 -> 안전하지 않음으로 이동 (공인인증이 아닌 사설인증이기 때문에 발생)
 2. 접속 후 url 좌측의 "주의 요함" 클릭 -> 인증서 올바르지 않음 클릭
 3. 인증서 확인 가능
+
+------
+#  ERROR: upstream sent too big header while reading response header from upstream
+
+## 증상
+운영 SSO, 접근 후 개발 SSO 접근 시 쿠키 갱신 API호출 시 404 Not Found Error를 반환함.
+개발 SSO만 접근했을 때는 문제가 없었음
+
+## ERROR 확인
+nginx 로그 확인 결과 
+upstream sent too big header while reading response header from upstream 발생
+
+## 원인 및 해결
+ 원인: 두개의 SSO를 사용하며 많은 쿠키를 발행 받아 Header가 너무 커져서 문제가 생김
+ 해결: Nginx의 proxy_buffer_size를 128k로 수정
+ ```
+ server {
+  listen        80;
+  server_name   host.tld;
+
+  location / {
+    proxy_pass       http://upstream;
+    ...
+
+    proxy_buffer_size          128k;
+    proxy_buffers              4 256k;
+    proxy_busy_buffers_size    256k;
+  }
+}
+ ```
+참고: https://ma.ttias.be/nginx-proxy-upstream-sent-big-header-reading-response-header-upstream/
+
